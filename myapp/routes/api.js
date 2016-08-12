@@ -14,5 +14,6 @@ router.get('/user/token/', user.token);                   // 验证用户token�
 router.get('/18tv/',tvHome.hemo18TV);
 router.get('/18tv/:typeId/:classId/:tvTime',tvHome.typeVideo);
 router.get('/18tv/ad/',tvHome.tvAdvertising);
+router.get('/18tv/updataApp/',tvHome.updataApp);
 
 module.exports = router;

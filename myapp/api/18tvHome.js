@@ -82,7 +82,7 @@ exports.typeVideo = function (req, res, next) {
 
 exports.tvAdvertising = function (req, res, next) {
     pool.getConnection(function (err, connection) {
-        var sql = 'SELECT * FROM tab_app_ad';
+        var sql = 'SELECT * FROM tab_app_ad WHERE id = 1';
         var params = [];
         connection.query(sql, params, function (err, rows) {
             if (err) {
@@ -92,6 +92,28 @@ exports.tvAdvertising = function (req, res, next) {
                 return;
             }
             res.send(rows[0]);
+            connection.release();  //释放数据库连接
+        });
+    });
+}
+
+exports.updataApp = function(req,res,next){
+     pool.getConnection(function (err, connection) {
+        var sql = 'SELECT * FROM tab_app_ad WHERE id = 2';
+        var params = [];
+        connection.query(sql, params, function (err, rows) {
+            if (err) {
+                console.log('[SELECT ERROR] - ', err.message);
+                connection.end();
+                res.send(errMessage.err5005);
+                return;
+            }
+            var row = rows[0];
+            var json = {};
+            json.version = row.version;
+            json.details = row.details;
+            json.url = row.url;
+            res.send(json);
             connection.release();  //释放数据库连接
         });
     });
