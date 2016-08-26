@@ -65,7 +65,7 @@ exports.typeVideo = function (req, res, next) {
         if (req.params.classId != 0) {
             sql += " AND a.typeId = " + req.params.classId;
         }
-        var sql2 = ' AND a.createTime < ?  ORDER BY a.createTime DESC LIMIT 20';
+        var sql2 = ' AND a.createTime < ?  ORDER BY a.createTime DESC LIMIT 40';
         var params = [req.params.typeId, req.params.tvTime];
         connection.query(sql + sql2, params, function (err, rows) {
             if (err) {
